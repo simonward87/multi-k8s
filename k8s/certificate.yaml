@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: my-cluster-pw-tls
+spec:
+  secretName: my-cluster-pw
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: mycluster.pw
+  dnsNames:
+    - mycluster.pw
+    - www.mycluster.pw
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - mycluster.pw
+          - www.mycluster.pw
